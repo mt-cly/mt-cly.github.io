@@ -1,9 +1,10 @@
 # Site settings
+# bock mapping
 title: CLY's Blog for Computer Vision
-SEOTitle: cv module
-header-img: img/home-bg.jpg
+SEOTitle: cv module | d
+header-img: img/home_bg.jpg
 email: mt.liyichen@gmail.com
-description: "关于程序与设计、黑客与画家 | 黄玄，Web & Mobile Lover，Software Engineer，UX Designer | 这里是 @Hux黄玄 的个人博客，与你一起发现更大的世界。"
+description: "for noting ideas of paper"
 keyword: "Semantic segmantation,Detection"
 url: ""              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
@@ -71,15 +72,15 @@ netease_comment: false
 # ba_track_id: [your track id]
 
 # Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-#ga_domain: huangxuan.me
+# ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
+# ga_domain: huangxuan.me
 
 
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "Paper!Paper!<br/>Give me paper!"
-sidebar-avatar: /img/avatar-hux-ny.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-about-description: "Paper~Paper~<br/>Give me a paper!"
+sidebar-avatar: /img/headimg.jpeg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
@@ -109,13 +110,14 @@ friends: [
         title: "hansmile",
         href: "https://github.com/2448845600"
     },{
-        title: "Yumho"
+        title: "Yumho",
         href: "https://github.com/gyh75520"    
     },{
-        title: "whxru"
+        title: "whxru",
         href: "https://github.com/whxru"
     },{
-        title: "nifengfeixiang"
+        title: "nifengfeixiang",
         href: "https://github.com/nifengfeixiang"
     }]
-]
+
+

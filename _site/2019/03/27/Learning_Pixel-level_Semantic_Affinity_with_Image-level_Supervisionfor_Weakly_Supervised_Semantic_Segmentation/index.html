@@ -11,31 +11,30 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Hello 2015 - cv module | d">
+    <meta property="og:title" content="论文笔记 Learning Pixel-level Semantic Affinity with Image-level Supervisionfor Weakly Supervised Semantic Segmentation - cv module | d">
     
     <meta property="og:type" content="article">
     <meta property="og:description" content="
-  “Yeah It’s on. ”
+  paper	https://arxiv.org/pdf/1803.10464.pdf
+code	https://github.com/jiwoon-ahn/psa
 
 
 ">
     
-    <meta property="article:published_time" content="2015-01-29T12:00:00Z">
+    <meta property="article:published_time" content="2019-03-27T00:00:00Z">
     
     
-    <meta property="article:author" content="Hux">
+    <meta property="article:author" content="cly">
     
     
-    <meta property="article:tag" content="生活">
-    
-    <meta property="article:tag" content="Meta">
+    <meta property="article:tag" content="weakly semantic segmantation">
     
     
     <meta property="og:image" content="/img/headimg.jpeg">
-    <meta property="og:url" content="/2015/01/29/hello-2015/">
+    <meta property="og:url" content="/2019/03/27/Learning_Pixel-level_Semantic_Affinity_with_Image-level_Supervisionfor_Weakly_Supervised_Semantic_Segmentation/">
     <meta property="og:site_name" content="cv module | d">
     
-    <title>Hello 2015 - cv module | d</title>
+    <title>论文笔记 Learning Pixel-level Semantic Affinity with Image-level Supervisionfor Weakly Supervised Semantic Segmentation - cv module | d</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -44,7 +43,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="/2015/01/29/hello-2015/">
+    <link rel="canonical" href="/2019/03/27/Learning_Pixel-level_Semantic_Affinity_with_Image-level_Supervisionfor_Weakly_Supervised_Semantic_Segmentation/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -186,7 +185,7 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-bg-2015.jpg" width="0" height="0"> -->
+<!-- <img src="/img/home_bg.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 
@@ -195,7 +194,7 @@
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/post-bg-2015.jpg');
+        background-image: url('/img/home_bg.jpg');
         background: ;
     }
 
@@ -212,15 +211,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/archive/?tag=%E7%94%9F%E6%B4%BB" title="生活">生活</a>
-                        
-                        <a class="tag" href="/archive/?tag=Meta" title="Meta">Meta</a>
+                        <a class="tag" href="/archive/?tag=weakly+semantic+segmantation" title="weakly semantic segmantation">weakly semantic segmantation</a>
                         
                     </div>
-                    <h1>Hello 2015</h1>
+                    <h1>论文笔记 Learning Pixel-level Semantic Affinity with Image-level Supervisionfor Weakly Supervised Semantic Segmentation</h1>
                     
-                    <h2 class="subheading"> "Hello World, Hello Blog"</h2>
-                    <span class="meta">Posted by Hux on January 29, 2015</span>
+                    <h2 class="subheading">弱监督学习</h2>
+                    <span class="meta">Posted by cly on March 27, 2019</span>
                 </div>
             </div>
         </div>
@@ -247,84 +244,42 @@
                 
 
 				<blockquote>
-  <p>“Yeah It’s on. ”</p>
+  <p>paper	https://arxiv.org/pdf/1803.10464.pdf
+code	https://github.com/jiwoon-ahn/psa</p>
 </blockquote>
 
-<h2 id="前言">前言</h2>
+<h2 id="背景">背景</h2>
+<p>作者提出了弱监督语义分割模型，本篇的弱监督是image-level的，与大多数image-level的语义分割模型出发思路一样，基于CAM获得初始物体定位后在进行后续处理。CAM能够获得大致的物体定位，但是图像中仍然存在很多待定的区域(对于每个类别，包括背景，都低置信度)。文章的亮点主要在于CAM之后的处理，提出了AffinityNet用于判别图像中任一像素点x与图像中的任一其他像素点y之间的亲和度(即属于同一类别的概率)。输入nxm大小的图像，输出(nxm x nxm)大小的相关性矩阵，之后以CAM的结果作为初始化，使用随机游走进行迭代更新，获得更加精细的物体轮廓。</p>
 
-<p>Hux 的 Blog 就这么开通了。</p>
-
-<p><a href="#build">跳过废话，直接看技术实现 </a></p>
-
-<p>2015 年，Hux 总算有个地方可以好好写点东西了。</p>
-
-<p>作为一个程序员， Blog 这种轮子要是挂在大众博客程序上就太没意思了。一是觉得大部分 Blog 服务都太丑，二是觉得不能随便定制不好玩。之前因为太懒没有折腾，结果就一直连个写 Blog 的地儿都没有。</p>
-
-<p>在玩了一段时间知乎之后，答题的快感又激起了我开博客的冲动。之前的<a href="http://huangxuan.me/portfolio">个人网站</a>是作品集形式的（现在集成进来了），并不适合用来写博文，一不做二不休，花一天搞一个吧！</p>
-
-<p id="build"></p>
-<hr />
-
-<h2 id="正文">正文</h2>
-
-<p>接下来说说搭建这个博客的技术细节。</p>
-
-<p>正好之前就有关注过 <a href="https://pages.github.com/">GitHub Pages</a> + <a href="http://jekyllrb.com/">Jekyll</a> 快速 Building Blog 的技术方案，非常轻松时尚。</p>
-
-<p>其优点非常明显：</p>
-
-<ul>
-  <li><strong>Markdown</strong> 带来的优雅写作体验</li>
-  <li>非常熟悉的 Git workflow ，<strong>Git Commit 即 Blog Post</strong></li>
-  <li>利用 GitHub Pages 的域名和免费无限空间，不用自己折腾主机
-    <ul>
-      <li>如果需要自定义域名，也只需要简单改改 DNS 加个 CNAME 就好了</li>
-    </ul>
-  </li>
-  <li>Jekyll 的自定制非常容易，基本就是个模版引擎</li>
-</ul>
-
-<p>本来觉得最大的缺点可能是 GitHub 在国内访问起来太慢，所以第二天一起床就到 GitCafe(Chinese GitHub Copy，现在被 Coding 收购了) 迁移了一个<a href="http://huxpro.coding.me">镜像</a>出来，结果还是巨慢。</p>
-
-<p>哥哥可是个前端好嘛！ 果断开 Chrome DevTool 查了下网络请求，原来是 <strong>pending 在了 Google Fonts</strong> 上，页面渲染一直被阻塞到请求超时为止，难怪这么慢。<br />
-忍痛割爱，只好把 Web Fonts 去了（反正超时看到的也只能是 fallback ），果然一下就正常了，而且 GitHub 和 GitCafe 对比并没有感受到明显的速度差异，虽然 github 的 ping 值明显要高一些，达到了 300ms，于是用 DNSPOD 优化了一下速度。</p>
+<h2 id="affinitynet-细节">AffinityNet 细节</h2>
+<p>论文中对AffinityNet的介绍较为概括，所以通过阅读源码了解了模型的基础框架。
+AffinityNet基于基础CNN网络:VGG-16/ResNet-38。作者提到使用ResNet-38在PASCAL VOC12 val上能达到60.2%的mIoU(媲美强监督的FCN了)。</p>
 
 <hr />
 
-<p>配置的过程中也没遇到什么坑，基本就是 Git 的流程，相当顺手</p>
-
-<p>大的 Jekyll 主题上直接 fork 了 Clean Blog（这个主题也相当有名，就不多赘述了。唯一的缺点大概就是没有标签支持，于是我给它补上了。）</p>
-
-<p>本地调试环境需要 <code class="highlighter-rouge">gem install jekyll</code>，结果 rubygem 的源居然被墙了……后来手动改成了我大淘宝的镜像源才成功</p>
-
-<p>Theme 的 CSS 是基于 Bootstrap 定制的，看得不爽的地方直接在 Less 里改就好了（平时更习惯 SCSS 些），<strong>不过其实我一直觉得 Bootstrap 在移动端的体验做得相当一般，比我在淘宝参与的团队 CSS 框架差多了……</strong>所以为了体验，也补了不少 CSS 进去</p>
-
-<p>最后就进入了耗时反而最长的<strong>做图、写字</strong>阶段，也算是进入了<strong>写博客</strong>的正轨，因为是类似 Hack Day 的方式去搭这个站的，所以折腾折腾着大半夜就过去了。</p>
-
-<p>第二天考虑中文字体的渲染，fork 了 <a href="http://www.typeisbeautiful.com/">Type is Beautiful</a> 的 <code class="highlighter-rouge">font</code> CSS，调整了字号，适配了 Win 的渣渲染，中英文混排效果好多了。</p>
-
-<h2 id="后记">后记</h2>
-
-<p>回顾这个博客的诞生，纯粹是出于个人兴趣。在知乎相关问题上回答并获得一定的 star 后，我决定把这个博客主题当作一个小小的开源项目来维护。</p>
-
-<p>在经历 v1.0 - v1.5 的蜕变后，这个博客主题愈发完整，不但增加了诸多 UI 层的优化（opinionated）；在代码层面，更加丰富的配置项也使得这个主题拥有了更好的灵活性与可拓展性。而作为一个开源项目，我也积极的为其完善文档与解决 issue。</p>
-
-<p>如果你恰好逛到了这里，希望你也能喜欢这个博客主题。</p>
-
-<p>—— Hux 后记于 2015.10</p>
-
+<p>以VGG-16为例
+VGG-16模型是经过5次(conv+maxpool)后接三个fc得到1000个识别输出。这里将pool4和pool5的stride设为1，使得conv4的特征图(8倍下采样)在之后的处理中都不被进一步下采样。</p>
+<ol>
+  <li>将conv-pool_4的结果(512张特征图)接1x1卷积降维得到(64张特征图),conv-pool_5的结果(512张特征图)接1x1卷积核降维得到(128张特征图),conv-pool_5fc的结果(将conv5的结果进行droupout和激活得到512张特征图)接1x1的卷积降维得到(256张特征图)。</li>
+  <li>将得到的同样大小的原图8倍下采样的64张+128张+256张特征图concate，得到448张原图八倍下采样的特征图。</li>
+  <li>设指定搜索半径s=5和某个像素点位置<script type="math/tex">x</script>，则对于特征图的某个位置像素记(x)，计算其与相邻的34个点的$x_{neb1}$,$x_{neb2}$…$x_{neb34}$的差，之后对于每个临接对$x-x_{nebi}$有448个结果，求平均值记做$x-x_{neb1}$,$x-x_{neb2}$…$x-x_{neb34}$。</li>
+  <li>所以设输出图像为nxm大小，经过步骤2得到了448张$\frac {n}{8}x\frac {m}{8}$
+<script type="math/tex">x+y</script>
+dsdasas
+random variables $X_1, X_2, X_3$ frof</li>
+</ol>
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
-                    
-                    <li class="next">
-                        <a href="/2019/03/27/Learning_Pixel-level_Semantic_Affinity_with_Image-level_Supervisionfor_Weakly_Supervised_Semantic_Segmentation/" data-toggle="tooltip" data-placement="top" title="论文笔记 Learning Pixel-level Semantic Affinity with Image-level Supervisionfor Weakly Supervised Semantic Segmentation">
-                        Next<br>
-                        <span>论文笔记 Learning Pixel-level Semantic Affinity with Image-level Supervisionfor Weakly Supervised Semantic Segmentation</span>
+                    <li class="previous">
+                        <a href="/2015/01/29/hello-2015/" data-toggle="tooltip" data-placement="top" title="Hello 2015">
+                        Previous<br>
+                        <span>Hello 2015</span>
                         </a>
                     </li>
+                    
                     
                 </ul>
                 <hr style="visibility: hidden;">
@@ -414,8 +369,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hux";
-    var disqus_identifier = "/2015/01/29/hello-2015";
-    var disqus_url = "/2015/01/29/hello-2015/";
+    var disqus_identifier = "/2019/03/27/Learning_Pixel-level_Semantic_Affinity_with_Image-level_Supervisionfor_Weakly_Supervised_Semantic_Segmentation";
+    var disqus_url = "/2019/03/27/Learning_Pixel-level_Semantic_Affinity_with_Image-level_Supervisionfor_Weakly_Supervised_Semantic_Segmentation/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
