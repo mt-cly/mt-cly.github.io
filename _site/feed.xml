@@ -5,8 +5,8 @@
     <description>for noting ideas of paper</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 28 Mar 2019 10:09:57 +0800</pubDate>
-    <lastBuildDate>Thu, 28 Mar 2019 10:09:57 +0800</lastBuildDate>
+    <pubDate>Thu, 28 Mar 2019 21:31:07 +0800</pubDate>
+    <lastBuildDate>Thu, 28 Mar 2019 21:31:07 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
@@ -28,13 +28,11 @@ AffinityNet基于基础CNN网络:VGG-16/ResNet-38。作者提到使用ResNet-38�
 &lt;p&gt;以VGG-16为例
 VGG-16模型是经过5次(conv+maxpool)后接三个fc得到1000个识别输出。这里将pool4和pool5的stride设为1，使得conv4的特征图(8倍下采样)在之后的处理中都不被进一步下采样。&lt;/p&gt;
 &lt;ol&gt;
-  &lt;li&gt;将conv-pool_4的结果(512张特征图)接1x1卷积降维得到(64张特征图),conv-pool_5的结果(512张特征图)接1x1卷积核降维得到(128张特征图),conv-pool_5fc的结果(将conv5的结果进行droupout和激活得到512张特征图)接1x1的卷积降维得到(256张特征图)。&lt;/li&gt;
+  &lt;li&gt;将conv-pool_4的结果(512张特征图)接1x1卷积降维得到(64张特征图),conv-pool_5的结果(512张特征图)接1x1卷积核降维得到(128张特征图),conv-pool_5fc的结果$($将conv5的结果进行droupout和激活得到512张特征图$)$接1x1的卷积降维得到(256张特征图)。&lt;/li&gt;
   &lt;li&gt;将得到的同样大小的原图8倍下采样的64张+128张+256张特征图concate，得到448张原图八倍下采样的特征图。&lt;/li&gt;
-  &lt;li&gt;设指定搜索半径s=5和某个像素点位置&lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt;，则对于特征图的某个位置像素记(x)，计算其与相邻的34个点的$x_{neb1}$,$x_{neb2}$…$x_{neb34}$的差，之后对于每个临接对$x-x_{nebi}$有448个结果，求平均值记做$x-x_{neb1}$,$x-x_{neb2}$…$x-x_{neb34}$。&lt;/li&gt;
-  &lt;li&gt;所以设输出图像为nxm大小，经过步骤2得到了448张$\frac {n}{8}x\frac {m}{8}$
-&lt;script type=&quot;math/tex&quot;&gt;x+y&lt;/script&gt;
-dsdasas
-random variables $X_1, X_2, X_3$ frof&lt;/li&gt;
+  &lt;li&gt;设指定搜索半径s=5和某个像素点位置&lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt;，则对于特征图的某个位置像素记$x$，计算其与相邻的34个点的$x_{neb1}$,$x_{neb2}$…$x_{neb34}$的相似程度=$e^{-(x-x_{nebi})}$，对于每个临接对$(x-x_{nebi})$在448张上分别计算得到448个结果，求448个差的平均值记做$(x-x_{neb1})$,$(x-x_{neb2})$…$(x-x_{neb34})$。&lt;/li&gt;
+  &lt;li&gt;所以设输出图像为nxm大小，经过步骤2得到了448张$\frac {n}{8}$ x $\frac {m}{8}$大小的特征图，经过步骤3得到一系列的点对及其亲和值。根据这些值填充到点的相关性矩阵affmat,affmat是一个$\frac {mn}{64}$ x $\frac {mn}{64}$大小的矩阵。比如$(x-x_{neb1})$的值就填充到affmat的$(x,x_{neb1})$和$(x_{neb1},x)$两个位置，对角线(x,x)都填1。所以affmat是一个稀疏矩阵，同时是一个对称矩阵。当然，得到了affmat之后要进行归一化处理。&lt;/li&gt;
+  &lt;li&gt;将先前CAM的结果(21张原图大小的特征图)经过8倍下采样以满足使用affmat的尺寸要求,之后将每张特征图各个点线性展开，这样就得到了一个$(21$ x $\frac {mn}{64})$ 的矩阵。之后将其与affmat进行矩阵运算$($代码中运行了8次，即CAM*affmat*affmat…*affmat$)$。运算后得到的还是$(21$ x $\frac {mn}{64})$大小的矩阵，将其恢复成21张特征图，上采样8倍回原图大小。之后还是按照同样的方式，各个点取21张中置信度最高的类别作为判定类别。&lt;/li&gt;
 &lt;/ol&gt;
 </description>
         <pubDate>Wed, 27 Mar 2019 00:00:00 +0800</pubDate>
